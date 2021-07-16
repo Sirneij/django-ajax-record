@@ -1,0 +1,28 @@
+{% load static %}
+<section class="hero is-info is-small">
+  <!-- Hero head: will stick at the top -->
+  <div class="hero-head">
+    <nav class="navbar">
+      <div class="container">
+        <div class="navbar-brand">
+          <a class="navbar-item" href="{% url 'core:index' %}">
+            <img src="{% static 'assets/images/logo.png' %}" alt="Logo" />
+          </a>
+          <span class="navbar-burger" data-target="navbarMenuHeroA">
+            <span></span>
+            <span></span>
+            <span></span>
+          </span>
+        </div>
+        <div id="navbarMenuHeroA" class="navbar-menu">
+          <div class="navbar-end">
+            <a class="navbar-item is-active" href="{% url 'core:index' %}">
+              Home
+            </a>
+            <a class="navbar-item" href="{% url 'core:record' %}"> Record </a>
+          </div>
+        </div>
+      </div>
+    </nav>
+  </div>
+</section>

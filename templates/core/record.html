@@ -1,0 +1,89 @@
+<!--inherits the layout-->
+{% extends '_base.html' %}
+<!--static-->
+{% load static %}
+<!--title-->
+{% block title %}{{page_title}}{% endblock title %}
+
+<!--additional css-->
+
+{% block css %}
+<link href="{% static 'assets/css/video-js.css' %}" rel="stylesheet" />
+<link href="{% static 'assets/css/all.min.css' %}" rel="stylesheet" />
+<link
+  href="{% static 'assets/css/videojs.wavesurfer.min.css' %}"
+  rel="stylesheet"
+/>
+<link href="{% static 'assets/css/videojs.record.css' %}" rel="stylesheet" />
+<style>
+  /* change player background color */
+  #recordAudio {
+    background-color: #3e8ed0;
+  }
+</style>
+{% endblock css %}
+<!--content-->
+{% block content %}
+<section class="section">
+  <div class="container">
+    <div class="columns">
+      <div class="column is-offset-4 is-4">
+        <h1 class="title">Record audio</h1>
+        <article class="message is-success" id="alert">
+          <div class="message-header">
+            <p>Recorded successfully!</p>
+            <button class="delete" aria-label="delete"></button>
+          </div>
+          <div class="message-body">
+            You have successfully recorded your message. You can now click on
+            the Submit button to post it.
+          </div>
+        </article>
+        <form method="POST" enctype="multipart/form-data">
+          {% csrf_token %}
+          <div class="field">
+            <div class="control has-icons-left has-icons-right">
+              <input
+                class="input"
+                type="text"
+                placeholder="Language"
+                name="language"
+                id="language"
+              />
+              <span class="icon is-left">
+                <i class="fas fa-language"></i>
+              </span>
+              <span class="icon is-right">
+                <i class="fas fa-check"></i>
+              </span>
+            </div>
+            <div
+              class="control has-icons-left has-icons-right"
+              style="margin-top: 1rem"
+            >
+              <audio id="recordAudio" class="video-js vjs-default-skin"></audio>
+            </div>
+            <div class="control" style="margin-top: 1rem">
+              <button class="button is-info" id="submit">Submit</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock content %}
+
+<!--additional js-->
+{% block js %}
+<script src="{% static 'assets/js/video.min.js' %}"></script>
+<script src="{% static 'assets/js/RecordRTC.js' %}"></script>
+<script src="{% static 'assets/js/adapter-latest.js' %}"></script>
+<script src="{% static 'assets/js/wavesurfer.js' %}"></script>
+<script src="{% static 'assets/js/wavesurfer.microphone.min.js' %}"></script>
+<script src="{% static 'assets/js/videojs.wavesurfer.min.js' %}"></script>
+
+<script src="{% static 'assets/js/videojs.record.min.js' %}"></script>
+<script src="{% static 'assets/js/browser-workaround.js' %}"></script>
+<script src="{% static 'assets/js/real.recording.js' %}"></script>
+{% endblock js %}

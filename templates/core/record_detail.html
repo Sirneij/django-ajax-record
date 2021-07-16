@@ -1,0 +1,31 @@
+<!--inherits the layout-->
+{% extends '_base.html' %}
+<!--static-->
+{% load static %}
+<!--title-->
+{% block title %}{{page_title}}{% endblock title %}
+
+<!--additional css-->
+
+<!--content-->
+{% block content %}
+<section class="section">
+  <div class="container">
+    <div class="columns">
+      <div class="column is-offset-4 is-4">
+        <h1 class="title">Recorded audio</h1>
+        <div class="card">
+          <div class="card-image">
+            <audio src="{{record.voice_record.url}}" controls></audio>
+          </div>
+          <div class="card-content">
+            <div class="content">
+              <p>Language: {{record.language}}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock content %}
