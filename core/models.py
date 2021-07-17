@@ -17,4 +17,4 @@ class Record(models.Model):
         return str(self.id)
 
     def get_absolute_url(self):
-        return reverse("record_detail", kwargs={"id": str(self.id)})
+        return reverse("core:record_detail", kwargs={"id": str(self.id)})
