@@ -1,4 +1,8 @@
 {% load static %}
+<!--url cache-->
+{% url 'core:record' as record_url %}
+<!--url cache-->
+{% url 'core:index' as home_url %}
 <section class="hero is-info is-small">
   <!-- Hero head: will stick at the top -->
   <div class="hero-head">
@@ -16,10 +20,10 @@
         </div>
         <div id="navbarMenuHeroA" class="navbar-menu">
           <div class="navbar-end">
-            <a class="navbar-item is-active" href="{% url 'core:index' %}">
+            <a class="navbar-item {% if request.path == home_url %} is-active {% endif %}" href="{% url 'core:index' %}">
               Home
             </a>
-            <a class="navbar-item" href="{% url 'core:record' %}"> Record </a>
+            <a class="navbar-item {% if request.path == record_url %} is-active {% endif %}" href="{% url 'core:record' %}"> Record </a>
           </div>
         </div>
       </div>
