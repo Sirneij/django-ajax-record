@@ -107,7 +107,7 @@ $("#submit").on("click", function () {
     success: function (response) {
       if (response.success) {
         document.getElementById("alert").style.display = "block";
-        window.location.href = "/";
+        window.location.href = `${response.url}`;
       } else {
         btn.html("Error").prop("disabled", false);
       }

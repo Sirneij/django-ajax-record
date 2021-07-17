@@ -14,6 +14,7 @@ def record(request):
         messages.success(request, "Audio recording successfully added!")
         return JsonResponse(
             {
+                "url": record.get_absolute_url(),
                 "success": True,
             }
         )
