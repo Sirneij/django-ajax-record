@@ -32,7 +32,7 @@ const options = {
     record: {
       audio: true, // only audio is turned on
       video: false, // you can turn this on as well if you prefer video recording.
-      maxLength: 60, // how long do you want the recording?
+      maxLength: 180, // how long do you want the recording?
       displayMilliseconds: true,
       debug: true,
     },

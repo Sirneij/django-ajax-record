@@ -1,12 +1,13 @@
 import uuid
 
+from cloudinary_storage.storage import RawMediaCloudinaryStorage
 from django.db import models
 from django.urls.base import reverse
 
 
 class Record(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    voice_record = models.FileField(upload_to="records")
+    voice_record = models.FileField(upload_to="records", storage=RawMediaCloudinaryStorage())
     language = models.CharField(max_length=50, null=True, blank=True)
 
     class Meta:
