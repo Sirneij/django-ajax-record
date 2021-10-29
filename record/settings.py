@@ -25,7 +25,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = config(
-    "SECRET_KEY", default="django-insecure-1lmyw6s4jb29#-f3oxx!)yx=_7fty-cxw2h4w4$tpm1e+pje#y"
+    "SECRET_KEY",
+    default="django-insecure-1lmyw6s4jb29#-f3oxx!)yx=_7fty-cxw2h4w4$tpm1e+pje#y",
 )
 
 # SECURITY WARNING: don't run with debug turned on in production!
@@ -43,11 +44,14 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    # Media Cloudinary
-    "cloudinary",
-    "cloudinary_storage",
     "core.apps.CoreConfig",
 ]
+if not DEBUG:
+    INSTALLED_APPS += [
+        # Media Cloudinary
+        "cloudinary",
+        "cloudinary_storage",
+    ]
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
@@ -57,8 +61,11 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
-    "whitenoise.middleware.WhiteNoiseMiddleware",
 ]
+if not DEBUG:
+    MIDDLEWARE += [
+        "whitenoise.middleware.WhiteNoiseMiddleware",
+    ]
 
 ROOT_URLCONF = "record.urls"
 
@@ -153,7 +160,8 @@ else:
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-import dj_database_url
+if not DEBUG:
+    import dj_database_url
 
-db_from_env = dj_database_url.config(conn_max_age=500)
-DATABASES["default"].update(db_from_env)
+    db_from_env = dj_database_url.config(conn_max_age=500)
+    DATABASES["default"].update(db_from_env)

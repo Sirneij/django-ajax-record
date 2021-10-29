@@ -84,7 +84,8 @@ player.on("finishRecord", function () {
 });
 
 // Give event listener to the submit button
-$("#submit").on("click", function () {
+$("#submit").on("click", function (event) {
+  event.preventDefault();
   let btn = $(this);
   //   change the button text and disable it
   btn.html("Submitting...").prop("disabled", true).addClass("disable-btn");
