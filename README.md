@@ -32,6 +32,15 @@ To run locally
   ```
   pip install -r requirements.txt
   ```
+- Modify `core/models.py` if you are not using Cloudinary as your storage service.
+  - From
+  ```
+    voice_record = models.FileField(upload_to="records", storage=RawMediaCloudinaryStorage())
+  ```
+  - To
+  ```
+    voice_record = models.FileField(upload_to="records")
+  ```
 - Make migrations and migrate the database:
   ```
    python manage.py makemigrations
