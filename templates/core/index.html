@@ -12,10 +12,44 @@
       <div>
         <audio src="{{record.voice_record.url}}" controls></audio>
         <p>Language: {{record.language}}</p>
+        <p id="result{{record.id}}" style="display: none">
+          Result: {{record.result}}
+        </p>
+        <p id="loader{{record.id}}">
+          {% load static %}
+          <img
+            src="{% static 'assets/images/loading.gif' %}"
+            alt="Logo"
+            alt="loading"
+            width="100px"
+            length="200px"
+          />
+        </p>
       </div>
     </div>
 
     {% endfor %}
   </div>
 </section>
+<script>
+  let result = document.getElementsByTagName("p");
+
+  setTimeout(() => {
+    for (let i = 0; i < result.length; i++) {
+      console.log(result[i].id);
+      if (result[i].id.includes("loader")) {
+        result[i].style.display = "none";
+      }
+    }
+  }, 3000);
+
+  setTimeout(() => {
+    for (let i = 0; i < result.length; i++) {
+      console.log(result[i].id);
+      if (result[i].id.includes("result")) {
+        result[i].style.display = "block";
+      }
+    }
+  }, 3500);
+</script>
 {% endblock content %}

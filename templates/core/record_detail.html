@@ -21,6 +21,8 @@
           <div class="card-content">
             <div class="content">
               <p>Language: {{record.language}}</p>
+			  <p id="result" style="display:none">Result: {{record.result}}</p>
+			  <p id="loader"> <img src="{% static 'assets/images/loading.gif' %}" alt="Logo" alt="loading" width="50px" length="100px"/> </p>
             </div>
           </div>
         </div>
@@ -28,4 +30,12 @@
     </div>
   </div>
 </section>
+<script> 
+	let result = document.getElementById("result")
+	let loader = document.getElementById("loader")
+	setTimeout(() => {
+		loader.style.display = "none"
+		result.style.display = "block"
+	}, 3000)
+</script>
 {% endblock content %}
