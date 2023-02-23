@@ -10,10 +10,25 @@
     {% for record in records %}
     <div class="level-item has-text-centered">
       <div>
-        <audio src="{{record.voice_record.url}}" controls></audio>
+        {% csrf_token %}
+        <audio
+          id="audio-{{record.id}}"
+          src="{{record.voice_record.url}}"
+          controls
+        ></audio>
+        <button
+          class="delete is-large"
+          onclick="deleteAudio('audio.{{record.id}}')"
+        ></button>
         <p>Language: {{record.language}}</p>
-        <p id="result{{record.id}}" style="display: none">
+        <p
+          id="result{{record.id}}"
+          style="display: none"
+          {% if record.result == "Healthy" %} class="green" {% else %} class="red" {% endif %}>
           Result: {{record.result}}
+        </p>
+        <p id="transcript{{record.id}}" style="display: none">
+          Transcript: {{record.transcript}}
         </p>
         <p id="loader{{record.id}}">
           {% load static %}
@@ -31,12 +46,26 @@
     {% endfor %}
   </div>
 </section>
+<section class="buttonList">
+  <div class="buttons are-large is-centered">
+    <div>
+      <input class="button" type="submit" value="Q & A" />
+      <input
+        class="button"
+        type="submit"
+        value="Picture Description"
+        onclick="addImage()"
+      />
+      <input class="button" type="submit" value="Join Alexa Project" />
+    </div>
+  </div>
+</section>
+
 <script>
   let result = document.getElementsByTagName("p");
 
   setTimeout(() => {
     for (let i = 0; i < result.length; i++) {
-      console.log(result[i].id);
       if (result[i].id.includes("loader")) {
         result[i].style.display = "none";
       }
@@ -45,11 +74,59 @@
 
   setTimeout(() => {
     for (let i = 0; i < result.length; i++) {
-      console.log(result[i].id);
       if (result[i].id.includes("result")) {
         result[i].style.display = "block";
       }
     }
   }, 3500);
+
+  setTimeout(() => {
+    for (let i = 0; i < result.length; i++) {
+      if (result[i].id.includes("transcript")) {
+        result[i].style.display = "block";
+      }
+    }
+  }, 3500);
+
+  function addImage() {
+    var img = document.createElement("img"); // create a new image element
+    img.src = "static/assets/images/cookieS.png"; // set the source of the image
+    img.alt = "Image"; // set the alt attribute of the image
+    img.classList.add("image");
+    img.classList.add("is-centered");
+    var navb = document.querySelector(".title"); // find the element with class abc
+    navb.parentNode.insertBefore(img, navb); // insert the image before the element with class abc
+  }
+
+  function deleteAudio(id) {
+    let deleteAud = document.getElementById(id);
+
+    let audioId = id.split(".");
+
+    $.ajax({
+      url: "record/" + audioId[1],
+      method: "DELETE",
+      success: function (response) {
+        location.reload();
+      },
+      error: function (error) {
+        console.log(error);
+        console.error(error);
+      },
+      cache: false,
+      processData: false,
+      contentType: false,
+    });
+  }
 </script>
+
+<style>
+  .red {
+    color: red;
+  }
+
+  .green {
+    color: green;
+  }
+</style>
 {% endblock content %}
