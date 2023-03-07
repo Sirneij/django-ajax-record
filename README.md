@@ -1,4 +1,4 @@
-# Django Ajax recording
+# Alzheimer detection
 
 This is the follow-up repository for the [live recording tutorial](https://dev.to/sirneij/django-and-ajax-building-a-recording-application-4j0a) on dev.to
 
@@ -8,11 +8,11 @@ To run locally
 
 - Clone this repo:
   ```
-   git clone https://github.com/Sirneij/django-ajax-record.git
+   git clone https://github.com/SamyakGangwal/alzheimerDetection.git
   ```
 - Change directory into the folder:
   ```
-   cd django-ajax-record
+   cd alzheimerDetection
   ```
 - Create a virtual environment:
   ```
@@ -54,4 +54,6 @@ To run locally
 
 # Live version
 
-This application is currentlly live [here](https://django-record.herokuapp.com/)
+This application is not currentlly live.
+
+<!-- [here](https://django-record.herokuapp.com/) -->

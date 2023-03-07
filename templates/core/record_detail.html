@@ -21,6 +21,22 @@
           <div class="card-content">
             <div class="content">
               <p>Language: {{record.language}}</p>
+              <p
+                id="result"
+                style="display: none"
+                {% if record.result == "Healthy" %} class="green" {% else %} class="red" {% endif %}>
+                Result: {{record.result}}
+              </p>
+              <p id="loader">
+                <img
+                  src="{% static 'assets/images/loading.gif' %}"
+                  alt="Logo"
+                  alt="loading"
+                  width="50px"
+                  length="100px"
+                />
+              </p>
+              <p id="transcript" style="display: none">Transcript: {{record.transcript}}</p>
             </div>
           </div>
         </div>
@@ -28,4 +44,25 @@
     </div>
   </div>
 </section>
+<script>
+  let result = document.getElementById("result");
+  let loader = document.getElementById("loader");
+  let transcript = document.getElementById("transcript");
+  setTimeout(() => {
+    loader.style.display = "none";
+    result.style.display = "block";
+    transcript.style.display = "block";
+  }, 3000);
+</script>
+
+<style>
+  .red {
+    color: red;
+  }
+
+  .green {
+    color: green;
+  }
+</style>
+
 {% endblock content %}
